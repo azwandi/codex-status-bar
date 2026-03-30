@@ -55,7 +55,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
 
         let font = NSFont.monospacedDigitSystemFont(ofSize: NSFont.systemFontSize, weight: .medium)
-        let labelColor = resolvedColor(.labelColor, for: button)
         let title: NSAttributedString
 
         if usageStore.refreshState == .enabled {
@@ -71,7 +70,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 NSAttributedString(
                     string: " - ",
                     attributes: [
-                        .foregroundColor: labelColor,
+                        .foregroundColor: NSColor.labelColor,
                         .font: font,
                     ]
                 )
@@ -92,24 +91,15 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             title = NSAttributedString(
                 string: "Codex",
                 attributes: [
-                    .foregroundColor: labelColor,
+                    .foregroundColor: NSColor.labelColor,
                     .font: font,
                 ]
             )
         }
 
-        button.title = ""
-        button.attributedTitle = NSAttributedString(string: "")
-        button.imagePosition = .imageOnly
-        button.image = renderStatusImage(for: title)
-    }
-
-    private func resolvedColor(_ color: NSColor, for button: NSStatusBarButton) -> NSColor {
-        var resolvedColor = color
-        button.effectiveAppearance.performAsCurrentDrawingAppearance {
-            resolvedColor = color
-        }
-        return resolvedColor
+        button.image = nil
+        button.imagePosition = .noImage
+        button.attributedTitle = title
     }
 
     private func usageColor(for percentUsed: Int) -> NSColor {
@@ -121,27 +111,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         default:
             return NSColor(calibratedRed: 0.78, green: 0.23, blue: 0.18, alpha: 1)
         }
-    }
-
-    private func renderStatusImage(for title: NSAttributedString) -> NSImage? {
-        let textSize = title.size()
-        let imageSize = NSSize(width: ceil(textSize.width), height: NSStatusBar.system.thickness)
-        let image = NSImage(size: imageSize)
-        image.isTemplate = false
-
-        image.lockFocus()
-        defer { image.unlockFocus() }
-
-        NSColor.clear.set()
-        NSRect(origin: .zero, size: imageSize).fill()
-
-        let origin = NSPoint(
-            x: 0,
-            y: round((imageSize.height - textSize.height) / 2)
-        )
-        title.draw(at: origin)
-
-        return image
     }
 
     @objc

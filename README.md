@@ -76,7 +76,7 @@ swift test
 Build the app bundle:
 
 ```bash
-APP_VERSION=0.2.1 ./scripts/build-app.sh
+APP_VERSION=0.2.2 ./scripts/build-app.sh
 ```
 
 This creates:
@@ -86,12 +86,12 @@ This creates:
 Create the DMG:
 
 ```bash
-VERSION=v0.2.1 ./scripts/create-dmg.sh
+VERSION=v0.2.2 ./scripts/create-dmg.sh
 ```
 
 This creates:
 
-`dist/CodexStatusBar-v0.2.1.dmg`
+`dist/CodexStatusBar-v0.2.2.dmg`
 
 ## Install
 
