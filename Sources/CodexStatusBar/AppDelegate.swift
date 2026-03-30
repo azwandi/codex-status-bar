@@ -55,6 +55,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
 
         let font = NSFont.monospacedDigitSystemFont(ofSize: NSFont.systemFontSize, weight: .medium)
+        let labelColor = resolvedColor(.labelColor, for: button)
         let title: NSAttributedString
 
         if usageStore.refreshState == .enabled {
@@ -70,7 +71,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                 NSAttributedString(
                     string: " - ",
                     attributes: [
-                        .foregroundColor: NSColor.labelColor,
+                        .foregroundColor: labelColor,
                         .font: font,
                     ]
                 )
@@ -91,7 +92,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             title = NSAttributedString(
                 string: "Codex",
                 attributes: [
-                    .foregroundColor: NSColor.labelColor,
+                    .foregroundColor: labelColor,
                     .font: font,
                 ]
             )
@@ -101,6 +102,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         button.attributedTitle = NSAttributedString(string: "")
         button.imagePosition = .imageOnly
         button.image = renderStatusImage(for: title)
+    }
+
+    private func resolvedColor(_ color: NSColor, for button: NSStatusBarButton) -> NSColor {
+        var resolvedColor = color
+        button.effectiveAppearance.performAsCurrentDrawingAppearance {
+            resolvedColor = color
+        }
+        return resolvedColor
     }
 
     private func usageColor(for percentUsed: Int) -> NSColor {

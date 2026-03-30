@@ -3,7 +3,7 @@ set -euo pipefail
 
 APP_NAME="CodexStatusBar"
 BUILD_CONFIG="${BUILD_CONFIG:-release}"
-APP_VERSION="${APP_VERSION:-0.2.0}"
+APP_VERSION="${APP_VERSION:-0.2.1}"
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 DIST_DIR="${DIST_DIR:-$ROOT_DIR/dist}"
 BUILD_DIR="$ROOT_DIR/.build"

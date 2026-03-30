@@ -19,6 +19,7 @@ The second number is the current secondary or weekly usage percentage when Codex
 - Native SwiftUI macOS menu bar app
 - Local-only usage reading from `~/.codex/sessions`
 - Compact color-coded menu bar display
+- Disabled menu bar label that follows the current macOS light or dark appearance
 - Dropdown cards for:
   - primary usage window
   - weekly or secondary usage window
@@ -75,7 +76,7 @@ swift test
 Build the app bundle:
 
 ```bash
-APP_VERSION=0.2.0 ./scripts/build-app.sh
+APP_VERSION=0.2.1 ./scripts/build-app.sh
 ```
 
 This creates:
@@ -85,12 +86,12 @@ This creates:
 Create the DMG:
 
 ```bash
-VERSION=v0.2.0 ./scripts/create-dmg.sh
+VERSION=v0.2.1 ./scripts/create-dmg.sh
 ```
 
 This creates:
 
-`dist/CodexStatusBar-v0.2.0.dmg`
+`dist/CodexStatusBar-v0.2.1.dmg`
 
 ## Install
 
