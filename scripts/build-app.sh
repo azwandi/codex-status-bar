@@ -3,14 +3,14 @@ set -euo pipefail
 
 APP_NAME="CodexStatusBar"
 BUILD_CONFIG="${BUILD_CONFIG:-release}"
-APP_VERSION="${APP_VERSION:-0.2.3}"
+APP_VERSION="${APP_VERSION:-0.2.4}"
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 DIST_DIR="${DIST_DIR:-$ROOT_DIR/dist}"
 BUILD_DIR="$ROOT_DIR/.build"
 
 cd "$ROOT_DIR"
 
-swift build -c "$BUILD_CONFIG"
+xcrun swift build -c "$BUILD_CONFIG"
 
 TRIPLE_DIR="$(find "$BUILD_DIR" -maxdepth 1 -type d -name '*-apple-macosx' | head -n 1)"
 if [[ -z "${TRIPLE_DIR:-}" ]]; then
